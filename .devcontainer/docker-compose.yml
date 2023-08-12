@@ -1,0 +1,24 @@
+version: '3.7'
+
+services:
+  gcsb-connect-newreports-webapi:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ../..:/workspaces:cached
+    command: sleep infinity
+    extends:
+      file: ../src/docker-compose.override.yml
+      service: gcsb-connect-newreports-webapi
+
+  gcsb-connect-newreports-database:
+    extends:
+      file: ../src/docker-compose.override.yml
+      service: gcsb-connect-newreports-database
+
+volumes:
+  pgdata:
+
+networks:
+  gcsb-reports-network:
